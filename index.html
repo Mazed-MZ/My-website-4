@@ -22,7 +22,7 @@
             <div class="col-md-4">
                 <div class="deposite status">
                     <h5>Deposite</h5>
-                    <h2>$00.0</h2>
+                    <h2>$<span id="currentDeposite">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -34,7 +34,7 @@
             <div class="col-md-4">
                 <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$1250.0</h2>
+                    <h2>$<span id="currentBalance">1250.0</span></h2>
                 </div>
             </div>
         </div>
@@ -49,8 +49,8 @@
             <div class="col-md-6">
                 <div class="login-area">
                     <h2>Withdraw</h2>
-                    <input type="text" class="form-control" placeholder="$ amount you want to withdraw"><br>
-                    <button class="btn btn-success">Withdraw</button>
+                    <input id="withdraw-amount" type="text" class="form-control" placeholder="$ amount you want to withdraw"><br>
+                    <button id="withdrawArea" class="btn btn-success">Withdraw</button>
                 </div>
             </div>
         </div>
@@ -59,7 +59,6 @@
         // login area event holder
         const enter = document.getElementById("login");
         enter.addEventListener("click", function(){
-            console.log("Someone Click Me");
             const home = document.getElementById("log-div");
             home.style.display="none";
             const account = document.getElementById("transaction");
@@ -70,7 +69,24 @@
         depositeSection.addEventListener("click", function(){
             const depositeInput = document.getElementById("deposite-amount").value;
             const depositeValue = parseFloat(depositeInput);
+
+            getfunctionupdate("currentDeposite", depositeValue);
+            getfunctionupdate("currentBalance", depositeValue);
+
+            depositeInput = document.getElementById("deposite-amount").value = "";
         })
+        // withdraw area event holder
+        const withdrawSection = document.getElementById("withdrawArea");
+        withdrawSection.addEventListener("click", function(){
+            const withdrawInput = document.getElementById("withdraw-amount").value;
+            const withdrawValue = parseFloat(withdrawInput);
+        })
+        function getfunctionupdate(id, depositeValue){
+            const current = document.getElementById(id).innerText;
+            const amount = parseFloat(current);
+            const totalAmount = depositeValue + amount;
+            document.getElementById(id).innerText = totalAmount;
+        }
     </script>
 </body>
 </html>
