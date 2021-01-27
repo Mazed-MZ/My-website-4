@@ -28,7 +28,7 @@
             <div class="col-md-4">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                    <h2>$00.0</h2>
+                    <h2>$<span id="currentWithdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -80,6 +80,16 @@
         withdrawSection.addEventListener("click", function(){
             const withdrawInput = document.getElementById("withdraw-amount").value;
             const withdrawValue = parseFloat(withdrawInput);
+            const withdrawAmount = document.getElementById("currentWithdraw").innerText;
+            const currentWithdraw = parseFloat(withdrawAmount);
+            const totalWithdraw = currentWithdraw + withdrawValue;
+            document.getElementById("currentWithdraw").innerText = totalWithdraw;
+            const initialBalance = document.getElementById("currentBalance").innerText;
+            const withBalance = parseFloat(initialBalance);
+            const totalBalance = withBalance - withdrawValue;
+            document.getElementById("currentBalance").innerText = totalBalance;
+
+            document.getElementById("withdraw-amount").value = "";
         })
         function getfunctionupdate(id, depositeValue){
             const current = document.getElementById(id).innerText;
